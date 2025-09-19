@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\API\Application;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\ApplicationLogHelper;
 use App\Http\Requests\ApplicationRequest;
 use App\Http\Resources\ApplicationResource;
 use App\Models\Application\Application;
+use App\Notifications\ApplicationReceived;
 use Illuminate\Http\Request;
+use Notification;
 use Str;
 
 class ApplicationAPIController extends Controller
@@ -46,10 +49,11 @@ class ApplicationAPIController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Application already exist',
-            ], 200);
+            ], 409);
         }
 
         $input['reference_no'] = self::generateReferenceNo();
+        $input['status_id'] = 2;
 
         $application = Application::create($input);
 
@@ -57,6 +61,14 @@ class ApplicationAPIController extends Controller
             $details->addMedia($request->file)
                 ->withCustomProperties(['type' => 'application', 'slug' => $application->id])
                 ->toMediaCollection('application');
+        }
+
+        ApplicationLogHelper::store($application->id, $application->status_id, $application->status_id, null, null);
+
+        if ($application->applicant_email !== null) {
+            Notification::route('mail', [
+                $application->applicant_email => $application->applicant_name,
+            ])->notify(new ApplicationReceived($application));
         }
 
         return [

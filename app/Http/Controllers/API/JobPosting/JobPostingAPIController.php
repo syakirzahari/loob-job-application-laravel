@@ -18,4 +18,11 @@ class JobPostingAPIController extends Controller
 
         return JobPostingResource::collection($data);
     }
+
+    public function show($id)
+    {
+        $data = JobPosting::with('position', 'positionType')->find($id);
+
+        return JobPostingResource::make($data);
+    }
 }

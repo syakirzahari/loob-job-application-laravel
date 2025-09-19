@@ -45,9 +45,9 @@ class ApplicationForm extends Form
     public function rules(): array
     {
         return [
-            'applicant_email' => 'string',
+            'applicant_email' => 'nullable|string',
             'applicant_phone' => 'string',
-            'applicant_address' => 'string',
+            'applicant_address' => 'nullable|string',
             'expected_salary' => 'string',
             'status_id' => 'required',
             'evaluation_remark' => 'required_if:status_id,4',

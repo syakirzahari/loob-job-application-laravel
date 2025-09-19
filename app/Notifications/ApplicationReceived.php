@@ -40,7 +40,7 @@ class ApplicationReceived extends Notification
                 'content' => [
                     'header' => 'Hi, '.$this->application->applicant_name,
                     'salutation' => 'Mr / Mrs,',
-                    'body' => 'Your application for position ['.$this->application->jobPosting->title.'] has been received:',
+                    'body' => 'Your application for position '.$this->application->jobPosting->title.' has been received:',
                     'thanks' => 'Thank You',
                 ],
             ]);
