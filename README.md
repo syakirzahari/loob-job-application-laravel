@@ -49,7 +49,7 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-7. Run migrations and seeders
+7. Run cache and config:clear
 
 ```bash
 php artisan cache:clear
