@@ -49,6 +49,13 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
+7. Run migrations and seeders
+
+```bash
+php artisan cache:clear
+php artisan config:clear
+```
+
 8. Run the project (or use any web development server installed etc: herd, laragon)
 
 ```bash
