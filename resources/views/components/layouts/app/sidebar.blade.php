@@ -3,7 +3,6 @@
 
 <head>
     @include('partials.head')
-    <link rel="stylesheet" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">

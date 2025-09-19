@@ -8,6 +8,7 @@ use App\Models\Ref\Position;
 use App\Models\Ref\Status;
 use App\Models\User;
 use Eloquent as Model;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\LogOptions;
@@ -99,5 +100,13 @@ class JobPosting extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults();
+    }
+
+    #[Scope]
+    protected function jobActive($query)
+    {
+        return $query->where('is_active', 1)
+            ->where('start_date', '<=', date('Y-m-d'))
+            ->where('end_date', '>=', date('Y-m-d'));
     }
 }

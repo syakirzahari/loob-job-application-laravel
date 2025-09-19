@@ -10,10 +10,7 @@ class JobPostingAPIController extends Controller
 {
     public function index()
     {
-        $data = JobPosting::with('position', 'positionType')
-            ->where('is_active', 1)
-            ->where('start_date', '<=', date('Y-m-d'))
-            ->where('end_date', '>=', date('Y-m-d'))
+        $data = JobPosting::jobActive()->with('position', 'positionType')
             ->get();
 
         return JobPostingResource::collection($data);
