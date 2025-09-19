@@ -70,7 +70,7 @@ php artisan test
 
 ### Testing account:
 
-email: supeadmin@loob.com
+email: superadmin@loob.com
 
 password: password
 
@@ -239,8 +239,8 @@ AI automatically suggests re-engaging old candidates when new matching roles ope
   <img src="screenshots/screenshot-2.png" alt="Status Detail" width="250"/>
   <img src="screenshots/screenshot-3.png" alt="Application Status" width="250"/>
 <img src="screenshots/screenshot-4.png" alt="Application Status" width="250"/>
-  <img src="screenshots/screenshot-1.png" alt="Status Detail" width="250"/>
   <img src="screenshots/screenshot-6.png" alt="Status Detail" width="250"/>
+    <img src="screenshots/screenshot-1.png" alt="Status Detail" width="250"/>
 </p>
 
 ## Contributing
