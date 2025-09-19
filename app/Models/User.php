@@ -3,30 +3,30 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Lab404\Impersonate\Models\Impersonate;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use Lab404\Impersonate\Models\Impersonate;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable implements HasMedia
 {
-    use HasUlids,
-    Impersonate,
-    HasRoles, //this line
-    HasApiTokens, 
-    HasFactory, 
-    Notifiable,
-    SoftDeletes,
-    InteractsWithMedia;
+    use HasApiTokens,
+        HasFactory,
+        HasRoles, // this line
+        HasUlids,
+        Impersonate,
+        InteractsWithMedia,
+        Notifiable,
+        SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -80,8 +80,8 @@ class User extends Authenticatable implements HasMedia
     {
         if ($searchString) {
             return $query->where('name', 'LIKE', "%{$searchString}%")
-                        ->orWhere('email', 'LIKE', "%{$searchString}%")
-                        ->orWhere('phone', 'LIKE',"%{$searchString}%");
+                ->orWhere('email', 'LIKE', "%{$searchString}%")
+                ->orWhere('phone', 'LIKE', "%{$searchString}%");
         }
     }
 }

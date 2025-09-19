@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description');
             $table->string('salary')->nullable();
-            $table->foreignId('position_type_id')->constrained('ref_statuses');
+            $table->foreignId('position_type_id')->nullable()->constrained('ref_statuses');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->foreignUlid('created_by')->constrained('users');
+            $table->foreignUlid('created_by')->nullable()->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });

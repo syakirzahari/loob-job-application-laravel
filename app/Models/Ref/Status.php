@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models\Ref;
 
-use App;
 use Eloquent as Model;
-use App\Models\Notification\Notification;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Status extends Model
 {
-    use SoftDeletes;
+    use HasFactory,
+        SoftDeletes;
 
     protected static $logFillable = true;
 
@@ -36,9 +36,9 @@ class Status extends Model
      * @var array
      */
     protected $casts = [
-        'id'                 => 'integer',
-        'name'               => 'string',
-        'parent_id'          => 'integer',
+        'id' => 'integer',
+        'name' => 'string',
+        'parent_id' => 'integer',
     ];
 
     /**
@@ -56,21 +56,20 @@ class Status extends Model
     }
 
     #[Scope]
-    protected function isParent(Builder $query) :void
+    protected function isParent(Builder $query): void
     {
         $query->whereNull('parent_id');
     }
 
-      #[Scope]
-    protected function isJobStatus(Builder $query) :void
+    #[Scope]
+    protected function isJobStatus(Builder $query): void
     {
         $query->where('parent_id', 7);
     }
 
     #[Scope]
-    protected function isApplicationStatus(Builder $query) :void
+    protected function isApplicationStatus(Builder $query): void
     {
         $query->where('parent_id', 1);
     }
-
 }

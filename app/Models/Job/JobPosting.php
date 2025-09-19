@@ -9,12 +9,14 @@ use App\Models\Ref\Status;
 use App\Models\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class JobPosting extends Model
 {
-    use HasUlids,
+    use HasFactory,
+        HasUlids,
         LogsActivity;
 
     protected static $logFillable = true;
@@ -65,10 +67,10 @@ class JobPosting extends Model
      */
     public static $rules = [
         'title' => 'required',
-        'position_type_id' => 'required',
+        'position_type_id' => 'nullable',
         'description' => 'required',
         'status_id' => 'integer',
-        'position_id' => 'required',
+        'position_id' => 'nullable',
         'is_active' => 'boolean',
         'salary' => 'nullable',
         'start_date' => 'required|date',
